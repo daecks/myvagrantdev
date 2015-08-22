@@ -1,0 +1,3 @@
+# Disable end-of-line normalization for this repo.
+# i.e., leave files as you found them.
+* -text
