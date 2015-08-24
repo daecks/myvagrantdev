@@ -5,41 +5,39 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    # All Vagrant configuration is done here. The most common configuration
-    # options are documented and commented below. For a complete reference,
-    # please see the online documentation at vagrantup.com.
 
     # Every Vagrant virtual environment requires a box to build off of.
-    config.vm.box = "pkdev"
-    config.vm.box_url = ["file:///D:/vms/linuxmint64.box"]
-
-    # Provider-specific configuration so you can fine-tune various
-    # backing providers for Vagrant. These expose provider-specific options.
-    # Example for VirtualBox:
-    #
+    config.vm.box = "daecksdev"
+    config.vm.box_url = ["file://D:/vms/linuxmint64.box"]
+    
     config.vm.provider "virtualbox" do |vb| 
         # Use the GUI.
         vb.gui = true
-        # Customize this to how many CPU cores you have/want to use.
-        vb.customize ["modifyvm", :id, "--memory", "2048", "--cpus", "2"]
-    end  
+        # Assuming Wconfig.ssh.insert_key = falseindows host, get amount of memory and allocate a third
+        amount_guest_memory = `wmic os get TotalVisibleMemorySize`.split("\n")[2].to_i / (1024 * 3)
+        # Allocate all CPUs to guest
+        num_guest_cpus = ENV['NUMBER_OF_PROCESSORS'].to_i 
+        #puts "Configuring virtual machine to use #{num_host_cpus} CPUs"
+        vb.customize ["modifyvm", :id, "--memory", "#{amount_guest_memory}", "--cpus", "#{num_guest_cpus}"]
+    end
 
     config.apt_proxy.http  = false
     config.apt_proxy.https = false
     config.proxy.http     = false
     config.proxy.https    = false
     config.proxy.no_proxy = "localhost,127.0.0.1"
-    
-    config.vm.provision :shell, :inline => "sudo apt-add-repository -y ppa:paolorotolo/android-studio"
-    config.vm.provision :shell, :inline => "sudo apt-get update"
-    config.vm.provision :shell, :inline => "sudo apt-get -y --force-yes install android-studio"
 
-    # Install commonly used tools and apps in ASTRO dev
-    config.vm.provision :shell, :inline => "sudo apt-get -y --force-yes install cscope"
-    config.vm.provision :shell, :inline => "sudo apt-get -y --force-yes install ctags"
-    config.vm.provision :shell, :inline => "sudo apt-get -y --force-yes install kdiff3"
-    config.vm.provision :shell, :inline => "sudo apt-get -y --force-yes install arduino"
-    config.vm.provision :shell, :inline => "sudo apt-get -y remove mate-screensaver"
+    config.persistent_storage.enabled = true
+    config.persistent_storage.location = "devdisk.vdi"
+    config.persistent_storage.size = 20000 # 20 GB size limit.
+    config.persistent_storage.mountname = 'daecksdev'
+    config.persistent_storage.filesystem = 'ext4'
+    config.persistent_storage.mountpoint = '/devspace'
+    config.vm.provision :shell, :inline => "sudo chown vagrant /devspace"
+    
+    config.vm.provision "file", source: "#{File.join(File.expand_path(File.dirname(__FILE__)), "setup/.bashrc")}", destination: ".bashrc"
+
+    config.vm.provision "shell", path: "setup/bootstrap.sh"
 
     # Mark "true" or "false" if you want the tool installed or not.  These are
     # used by the chef recipes below which not only install apps, but also
@@ -51,7 +49,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # `vagrant box outdated`. This is not recommended.
     # Setting this to false however to attempt to fix bug where perfoming
     # "vagrant up" while offline spawns a new VM instance.
-    #config.vm.box_check_update = false
+    config.vm.box_check_update = false
 
     # Create a forwarded port mapping which allows access to a specific port
     # within the machine from a port on the host machine. In the example below,
@@ -85,6 +83,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # path, and data_bags path (all relative to this Vagrantfile), and adding
     # some recipes and/or roles.
     #
+    
     config.vm.provision "chef_solo" do |chef|
         if install_vim
             chef.add_recipe 'vim-setup'
@@ -94,6 +93,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         apt-get install -y ncurses-dev python2.7-dev
             HERE
 
+       
             clone_colo_manually = <<-HERE
         set -e
         # Copy across .vimrc from Astrodev repo.
