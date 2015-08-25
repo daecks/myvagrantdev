@@ -2,6 +2,7 @@
 
 ### Vagrant ###
 .vagrant/
+devdisk.vdi
 
 # Swap and temp files
 *.swp
