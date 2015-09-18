@@ -4,6 +4,9 @@
 .vagrant/
 devdisk.vdi
 
+# development directories
+development/
+
 # Swap and temp files
 *.swp
 *\~
