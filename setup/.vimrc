@@ -14,14 +14,14 @@
      
      " Setup Vim plugins via Vundle {
          filetype off
-         set rtp+=~/.vim/bundle/vundle/
-         call vundle#rc()
+         set rtp+=~/.vim/bundle/Vundle.vim
+         call vundle#begin()
 
          " This is the Vundle package, which can be found on GitHub.
          " For GitHub repos, you specify plugins using the
          " 'user/repository' format.  We include Vundle itself to
          " ensure it is always updated.
-         Plugin 'gmarik/vundle'
+         Plugin 'VundleVim/Vundle.vim'
 
          " Various other plugins
          "Plugin 'vim-scripts/cscope.vim'
@@ -35,6 +35,7 @@
 
          " Colorschemes
          Bundle 'tomasr/molokai'
+         call vundle#end()
      " }
 
  " }

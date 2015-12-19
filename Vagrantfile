@@ -8,7 +8,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Every Vagrant virtual environment requires a box to build off of.
     config.vm.box = "daecksdev"
-    config.vm.box_url = ["file://D:/vms/linuxmint64.box"]
+    config.vm.box_url = ["file:///G:/vagrantboxes/daecks_dev_0.1.box"]
+    config.ssh.insert_key = false
     
     config.vm.provider "virtualbox" do |vb| 
         # Use the GUI.
@@ -27,29 +28,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.proxy.https    = false
     config.proxy.no_proxy = "localhost,127.0.0.1"
 
-    config.persistent_storage.enabled = true
-    config.persistent_storage.location = "devdisk.vdi"
-    config.persistent_storage.size = 20000 # 20 GB size limit.
-    config.persistent_storage.mountname = 'daecksdev'
-    config.persistent_storage.filesystem = 'ext4'
-    config.persistent_storage.mountpoint = '/devspace'
-    config.vm.provision :shell, :inline => "sudo chown vagrant /devspace"
-    
-    config.vm.provision "file", source: "#{File.join(File.expand_path(File.dirname(__FILE__)), "setup/.bashrc")}", destination: ".bashrc"
-
     config.vm.provision "shell", path: "setup/bootstrap.sh"
 
     # Mark "true" or "false" if you want the tool installed or not.  These are
     # used by the chef recipes below which not only install apps, but also
     # configure them.
-    install_vim = true
 
     # Disable automatic box update checking. If you disable this, then
     # boxes will only be checked for updates when the user runs
     # `vagrant box outdated`. This is not recommended.
     # Setting this to false however to attempt to fix bug where perfoming
     # "vagrant up" while offline spawns a new VM instance.
-    config.vm.box_check_update = false
+    config.vm.box_check_update = true
 
     # Create a forwarded port mapping which allows access to a specific port
     # within the machine from a port on the host machine. In the example below,
@@ -83,54 +73,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # path, and data_bags path (all relative to this Vagrantfile), and adding
     # some recipes and/or roles.
     #
-    
-    config.vm.provision "chef_solo" do |chef|
-        if install_vim
-            chef.add_recipe 'vim-setup'
-            installation_dependencies = <<-HERE
-        apt-get update
-        apt-get install -y build-essential cmake
-        apt-get install -y ncurses-dev python2.7-dev
-            HERE
-
-       
-            clone_colo_manually = <<-HERE
-        set -e
-        # Copy across .vimrc from Astrodev repo.
-        cp /vagrant/cookbooks/vim-setup/.vimrc ~/.vimrc
-        # YCM is useful, but very, very special.
-        if [ ! -d "$HOME/.vim/bundle/YouCompleteMe" ]; then
-            git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/bundle/YouCompleteMe
-        fi
-        cd ~/.vim/bundle/YouCompleteMe
-        git submodule update --init --recursive
-        ./install.sh --clang-completer
-            HERE
-
-            install_global_vim_plugin_dependencies = <<-HERE
-        set -e
-        apt-get update
-        # for YCM
-        apt-get install -y build-essential cmake python2.7-dev
-            HERE
-
-            install_user_vim_plugin_dependencies = <<-HERE
-        set -e
-            HERE
-
-            chef.json = {
-                vim_setup: {
-                    base_packages: ['vim-gtk'],
-                    custom_preinstall_bash: installation_dependencies,
-                    custom_bash_user_before_vundle: clone_colo_manually,
-                    custom_bash_once_after_vundle: install_global_vim_plugin_dependencies,
-                    custom_bash_user_after_vundle: install_user_vim_plugin_dependencies,
-                    global_vimrc: false,
-                    users: [ 'vagrant', 'vagrant' ],
-                    use_vundle: true,
-                    vundle_timeout: 1000,
-                }
-            }
-        end
-    end
 end
