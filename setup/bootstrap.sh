@@ -6,7 +6,38 @@ sudo apt-get -y --force-yes install cscope
 sudo apt-get -y --force-yes install ctags
 sudo apt-get -y --force-yes install kdiff3
 sudo apt-get -y --force-yes install cppcheck
-sudo apt-get install -y --force-yes clang-format-3.6
+sudo apt-get -y --force-yes install clang-format-3.6
 sudo apt-get -y --force-yes install sysbench
 
+# Bookclub
+/vagrant/setup/install_seven_languages_book.sh
+
+# Install command line fixer
+#cd /home/vagrant
+#wget -O - https://raw.githubusercontent.com/nvbn/thefuck/master/install.sh | sh - && $0
+#
+# Better git bash prompt
+cd /home//vagrant
+git clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt
+grep -q -F 'source /home/vagrant/.bash-git-prompt/gitprompt' /home/vagrant/.bashrc || echo 'source /home/vagrant/.bash-git-prompt/gitprompt' >> /home/vagrant/.bashrc
+#
+#grep -q -F 'set -o vi' /home/vagrant/.bashrc || echo 'set -o vi' >> /home/vagrant/.bashrc
+
+# Android Development environment setup
+# main tools
+sudo apt-get -y --force-yes install git gnupg flex bison gperf build-essential
+sudo apt-get -y --force-yes install zip curl libc6-dev libncurses5-dev:i386 x11proto-core-dev
+sudo apt-get -y --force-yes install libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386
+sudo apt-get -y --force-yes install libgl1-mesa-dev g++-multilib mingw32 tofrodos
+sudo apt-get -y --force-yes install python-markdown libxml2-utils xsltproc zlib1g-dev:i386
+sudo apt-get -y --force-yes install libswitch-perl
+sudo rm -rf /usr/lib/i386-linux-gnu/libGL.so
+sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
+
+# Install Android environment tools
+/vagrant/setup/install_java6.sh
+/vagrant/setup/install_android_studio.sh
+/vagrant/setup/install_android_sdk.sh
+
+# Save best till last
 /vagrant/setup/install_vim.sh

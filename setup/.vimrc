@@ -21,10 +21,13 @@
          " For GitHub repos, you specify plugins using the
          " 'user/repository' format.  We include Vundle itself to
          " ensure it is always updated.
-         Plugin 'VundleVim/Vundle.vim'
+         Plugin 'gmarik/Vundle.vim'
 
          " Various other plugins
          "Plugin 'vim-scripts/cscope.vim'
+         Plugin 'vim-scripts/autoload_cscope.vim'
+         " Don't use the autoload cscope plugin's menus.
+         let g:autoscope_menus = 0
          Plugin 'bling/vim-airline'
          Plugin 'vim-scripts/taglist.vim'
          Plugin 'Valloric/YouCompleteMe'
@@ -32,6 +35,7 @@
          let g:ycm_global_ycm_extra_conf = '/vagrant/cookbooks/vim-setup/.ycm_extra_conf.py'
          Plugin 'simplyzhao/cscope_maps.vim'
          Plugin 'tpope/vim-fugitive'
+         Plugin 'rhysd/vim-clang-format'
 
          " Colorschemes
          Bundle 'tomasr/molokai'
@@ -368,23 +372,14 @@ else
 end
 
 "-----------------------------------------------------------------------------
-" Search for cscope database up directory tree (ala the way ctags does)
+" clang-format for Vim setup
 "-----------------------------------------------------------------------------
-function! LoadCscope()
-  let db = findfile("cscope.out", ".;")
-  if (!empty(db))
-    let path = strpart(db, 0, match(db, "/cscope.out$"))
-    set nocscopeverbose " suppress 'duplicate connection' error
-    exe "cs add " . db . " " . path
-    set cscopeverbose
-  endif
-endfunction
-au BufEnter /* call LoadCscope()
+map <C-I> :pyf /usr/share/vim/addons/syntax/clang-format-3.5.py<cr>
+imap <C-I> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.5.py<cr>
 
 "-----------------------------------------------------------------------------
 " Fix constant spelling mistakes
 "-----------------------------------------------------------------------------
-
 iab teh       the
 iab Teh       The
 iab taht      that
@@ -464,7 +459,7 @@ if has("gui_running")
     " Maximize gvim window.
     "set lines=999 columns=999
     set lines=90 columns=170
-    colorschem molokai
+    colorscheme molokai
 else
     " This is console Vim.
     if exists("+lines")

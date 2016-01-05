@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provider "virtualbox" do |vb| 
         # Use the GUI.
         vb.gui = true
-        # Assuming Wconfig.ssh.insert_key = falseindows host, get amount of memory and allocate a third
+        # Windows host, get amount of memory and allocate a third
         amount_guest_memory = `wmic os get TotalVisibleMemorySize`.split("\n")[2].to_i / (1024 * 3)
         # Allocate all CPUs to guest
         num_guest_cpus = ENV['NUMBER_OF_PROCESSORS'].to_i 
