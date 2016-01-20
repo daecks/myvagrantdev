@@ -16,12 +16,6 @@ sudo apt-get -y --force-yes install sysbench
 #cd /home/vagrant
 #wget -O - https://raw.githubusercontent.com/nvbn/thefuck/master/install.sh | sh - && $0
 #
-# Better git bash prompt
-cd /home//vagrant
-git clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt
-grep -q -F 'source /home/vagrant/.bash-git-prompt/gitprompt' /home/vagrant/.bashrc || echo 'source /home/vagrant/.bash-git-prompt/gitprompt' >> /home/vagrant/.bashrc
-#
-#grep -q -F 'set -o vi' /home/vagrant/.bashrc || echo 'set -o vi' >> /home/vagrant/.bashrc
 
 # Android Development environment setup
 # main tools
@@ -38,6 +32,7 @@ sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL
 /vagrant/setup/install_java6.sh
 /vagrant/setup/install_android_studio.sh
 /vagrant/setup/install_android_sdk.sh
+/vagrant/setup/install_better_git_bash_prompt.sh
 
 # Save best till last
 /vagrant/setup/install_vim.sh

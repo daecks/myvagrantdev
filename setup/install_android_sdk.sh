@@ -2,7 +2,7 @@
 set -e # Bail immediately if any part fails
 SDK_DIR=/home/vagrant/Android/Sdk
 ANDROID_BIN="${SDK_DIR}/tools/android"
-if [ ! -d $ANDROID_BIN ] ; then
+if [ ! -e $ANDROID_BIN ] ; then
     echo "Installing Android SDK"
     TMPFILE=`mktemp`
     PWD=`pwd`
