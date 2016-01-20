@@ -50,7 +50,7 @@ if [ ! -e $ANDROID_BIN ] ; then
     echo yes | $ANDROID_BIN update sdk --no-ui -a -t $BUILD_TOOLS_19_1
     echo yes | $ANDROID_BIN update sdk --no-ui -a -t $BUILD_TOOLS_LATEST
     echo yes | $ANDROID_BIN update sdk --no-ui -a -t $SDK_PLATFORM_4_4_2
-    echo yes | $ANDROID_BIN update sdk --no-ui -a -t $SYSTEM_IMAGE_LATEST
+    echo yes | $ANDROID_BIN update sdk --no-ui -a -t $SYSTEM_IMAGE_API19
     echo yes | $ANDROID_BIN update sdk --no-ui -a -t $GOOGLE_APIS_API19
     echo yes | $ANDROID_BIN update sdk --no-ui -a -t $API_SOURCES_API19
     echo yes | $ANDROID_BIN update sdk --no-ui -a -t $SUPPORT_REPOSITORY_LATEST
