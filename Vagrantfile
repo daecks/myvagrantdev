@@ -20,6 +20,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         num_guest_cpus = ENV['NUMBER_OF_PROCESSORS'].to_i 
         #puts "Configuring virtual machine to use #{num_host_cpus} CPUs"
         vb.customize ["modifyvm", :id, "--memory", "#{amount_guest_memory}", "--cpus", "#{num_guest_cpus}"]
+        vb.customize ["modifyvm", :id, "--usb", "on"]
+        vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'MotoX', '--vendorid', '0x22b8']
+        vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'MSI', '--vendorid', '0x05c6']
+        vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Android bootloader', '--vendorid', '0x18d1']
     end
 
     config.apt_proxy.http  = false

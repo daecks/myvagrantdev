@@ -30,6 +30,7 @@ sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL
 
 # Install Android environment tools
 /vagrant/setup/install_java6.sh
+/vagrant/setup/install_java7.sh
 /vagrant/setup/install_android_studio.sh
 /vagrant/setup/install_android_sdk.sh
 /vagrant/setup/install_better_git_bash_prompt.sh
