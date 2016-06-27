@@ -8,6 +8,9 @@ sudo apt-get -y --force-yes install kdiff3
 sudo apt-get -y --force-yes install cppcheck
 sudo apt-get -y --force-yes install clang-format-3.6
 sudo apt-get -y --force-yes install sysbench
+sudo apt-get -y --force-yes install tmux
+sudo apt-get install --yes puppet
+sudo apt-get -y --force-yes install htop
 
 # Bookclub
 /vagrant/setup/install_seven_languages_book.sh
@@ -25,6 +28,7 @@ sudo apt-get -y --force-yes install libx11-dev:i386 libreadline6-dev:i386 libgl1
 sudo apt-get -y --force-yes install libgl1-mesa-dev g++-multilib mingw32 tofrodos
 sudo apt-get -y --force-yes install python-markdown libxml2-utils xsltproc zlib1g-dev:i386
 sudo apt-get -y --force-yes install libswitch-perl
+sudo apt-get -y --force-yes install phablet-tools
 sudo rm -rf /usr/lib/i386-linux-gnu/libGL.so
 sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
 

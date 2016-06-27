@@ -14,8 +14,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provider "virtualbox" do |vb| 
         # Use the GUI.
         vb.gui = true
-        # Windows host, get amount of memory and allocate a third
-        amount_guest_memory = `wmic os get TotalVisibleMemorySize`.split("\n")[2].to_i / (1024 * 3)
+        # Windows host, get amount of memory and allocate a half
+        amount_guest_memory = `wmic os get TotalVisibleMemorySize`.split("\n")[2].to_i / (1024 * 2)
         # Allocate all CPUs to guest
         num_guest_cpus = ENV['NUMBER_OF_PROCESSORS'].to_i 
         #puts "Configuring virtual machine to use #{num_host_cpus} CPUs"
@@ -25,6 +25,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'MSI', '--vendorid', '0x05c6']
         vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Android bootloader', '--vendorid', '0x18d1']
     end
+
+    config.persistent_storage.enabled = true
+    config.persistent_storage.location = "devdisk.vdi"
+    config.persistent_storage.size = 80000 # Max of 80 GB for devspace drive
+    config.persistent_storage.mountname = 'mydevspace'
+    config.persistent_storage.filesystem = 'ext4'
+    config.persistent_storage.mountpoint = '/devspace'
+    config.vm.provision :shell, :inline => "sudo chown vagrant /devspace"
 
     config.apt_proxy.http  = false
     config.apt_proxy.https = false

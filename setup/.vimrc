@@ -450,11 +450,31 @@ vnoremap <silent> # :<C-U>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 "-----------------------------------------------------------------------------
+" Neovim terminal bindings 
+"-----------------------------------------------------------------------------
+:tnoremap <Esc> <C-\><C-n>
+:tnoremap <A-h> <C-\><C-n><C-w>h
+:tnoremap <A-j> <C-\><C-n><C-w>j
+:tnoremap <A-k> <C-\><C-n><C-w>k
+:tnoremap <A-l> <C-\><C-n><C-w>l
+:nnoremap <A-h> <C-w>h
+:nnoremap <A-j> <C-w>j
+:nnoremap <A-k> <C-w>k
+:nnoremap <A-l> <C-w>l
+
+"-----------------------------------------------------------------------------
 " Set up the window colors and size
 "-----------------------------------------------------------------------------
 if has("gui_running")
     " GUI is running or is about to start.
     "set guifont=Droid\ Sans\ Mono:h10:cANSI
+    set guifont=Droid\ Sans\ Mono
+    " Maximize gvim window.
+    "set lines=999 columns=999
+    set lines=90 columns=170
+    colorscheme molokai
+elseif has("nvim")
+    " nvim settings 
     set guifont=Droid\ Sans\ Mono
     " Maximize gvim window.
     "set lines=999 columns=999

@@ -1,16 +1,7 @@
 #!/bin/bash
 
-# General info: http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
 
-# Assumes .bashrc contains the following:
-# set xterm-color256
-#function _update_ps1() {
-#    PS1="$(~/powerline-shell.py $? 2> /dev/null)"
-#}
-#
-#if [ "$TERM" != "linux" ]; then
-#    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-#fi
+# General info: http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
 
 # Install Powerline
 #Reference https://powerline.readthedocs.org/en/latest/installation/linux.html#font-installation
