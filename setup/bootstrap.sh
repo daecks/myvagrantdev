@@ -11,6 +11,7 @@ sudo apt-get -y --force-yes install sysbench
 sudo apt-get -y --force-yes install tmux
 sudo apt-get install --yes puppet
 sudo apt-get -y --force-yes install htop
+/vagrant/setup/install_neovim.sh
 
 # Bookclub
 /vagrant/setup/install_seven_languages_book.sh

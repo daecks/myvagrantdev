@@ -36,7 +36,6 @@
          Plugin 'simplyzhao/cscope_maps.vim'
          Plugin 'tpope/vim-fugitive'
          Plugin 'rhysd/vim-clang-format'
-
          " Colorschemes
          Bundle 'tomasr/molokai'
          call vundle#end()
@@ -46,7 +45,7 @@
  
  " General {
      set background=dark         " Assume a dark background
-     if !has('win32') && !has('win64')
+     if !has('win32') && !has('win64') && !has('nvim')
          set term=$TERM       " Make arrow and other keys work
      endif
      filetype plugin indent on   " Automatically detect file types.
@@ -206,9 +205,6 @@ set timeoutlen=1000
 
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
-
-" Disable encryption (:X)
-set key=
 
 " Same as default except that I remove the 'u' option
 set complete=.,w,b,t
@@ -452,6 +448,7 @@ vnoremap <silent> # :<C-U>
 "-----------------------------------------------------------------------------
 " Neovim terminal bindings 
 "-----------------------------------------------------------------------------
+if has("nvim")
 :tnoremap <Esc> <C-\><C-n>
 :tnoremap <A-h> <C-\><C-n><C-w>h
 :tnoremap <A-j> <C-\><C-n><C-w>j
@@ -461,6 +458,7 @@ vnoremap <silent> # :<C-U>
 :nnoremap <A-j> <C-w>j
 :nnoremap <A-k> <C-w>k
 :nnoremap <A-l> <C-w>l
+endif
 
 "-----------------------------------------------------------------------------
 " Set up the window colors and size
@@ -491,4 +489,3 @@ else
     " colorschem desert
 endif
 :nohls
-
