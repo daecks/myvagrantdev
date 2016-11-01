@@ -1,4 +1,3 @@
-#!/bin/bash
 echo "Installing Vim"
 VIM_DIR=/home/vagrant/.vim
 VUNDLE_DIR=/home/vagrant/.vim/bundle/Vundle.vim
@@ -10,10 +9,37 @@ fi
 
 # Ensure dependencies are met
 sudo apt-get -qq update
-sudo apt-get install -y build-essential cmake ncurses-dev python2.7-dev dos2unix
+sudo apt-get install -y libncurses5-dev libgnome2-dev libgnomeui-dev \
+    libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+    python3-dev ruby-dev lua5.1 lua5.1-dev git \
+    build-essential cmake ncurses-dev python2.7-dev dos2unix checkinstall
 
-# Get gVim
-sudo apt-get install -y vim-gtk
+# Remove existing version of Vim
+sudo apt-get remove -y vim vim-runtime gvim
+
+# Install latest Vim
+cd /tmp && git clone https://github.com/vim/vim.git
+cd vim
+./configure --with-features=huge \
+   --enable-multibyte \
+   --enable-rubyinterp \
+   --enable-pythoninterp=yes \
+   --with-python-config-dir=/usr/lib/python2.7/config \
+#   --enable-python3interp \
+#   --with-python3-config-dir=/usr/lib/python3.5/config \
+   --enable-perlinterp \
+   --enable-luainterp \
+   --enable-gui=gtk2 \
+   --enable-cscope \
+   --prefix=/usr
+make VIMRUNTIMEDIR=/usr/share/vim/vim80
+sudo make install
+
+sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
+sudo update-alternatives --set editor /usr/bin/vim
+sudo update-alternatives --install /usr/bin/vi vi /usr/bin/vim 1
+sudo update-alternatives --set vi /usr/bin/vim
 
 # Force symlink of .vimrc
 if ! [ -L /home/vagrant/.vimrc ]; then
