@@ -228,6 +228,10 @@ set diffopt+=iwhite
 " Let the syntax highlighting for Java files allow cpp keywords
 let java_allow_cpp_keywords = 1
 
+" Syntax highlighting for Python
+let python_highlight_all=1
+
+
 " Turn off that stupid highlight search
 nmap <silent> <leader>n :set invhls<CR>:set hls?<CR>
 
@@ -466,7 +470,7 @@ endif
 if has("gui_running")
     " GUI is running or is about to start.
     "set guifont=Droid\ Sans\ Mono:h10:cANSI
-    set guifont=Droid\ Sans\ Mono
+    set guifont=Noto\ Mono
     " Maximize gvim window.
     "set lines=999 columns=999
     set lines=90 columns=170
