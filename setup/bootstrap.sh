@@ -1,4 +1,9 @@
 #!/bin/bash
+
+# Setup common dirs
+mkdir -p /home/vagrant/bin
+
+
 /vagrant/setup/install_git.sh
 
 sudo apt-get -y --force-yes install ddd
@@ -17,9 +22,8 @@ sudo apt-get -y --force-yes install htop
 /vagrant/setup/install_seven_languages_book.sh
 
 # Install command line fixer
-#cd /home/vagrant
-#wget -O - https://raw.githubusercontent.com/nvbn/thefuck/master/install.sh | sh - && $0
-#
+cd /home/vagrant
+wget -O - https://raw.githubusercontent.com/nvbn/thefuck/master/install.sh | sh - && $0
 
 # Android Development environment setup
 # main tools
@@ -36,9 +40,9 @@ sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL
 # Install Android environment tools
 /vagrant/setup/install_java6.sh
 /vagrant/setup/install_java7.sh
-/vagrant/setup/install_android_studio.sh
-/vagrant/setup/install_android_sdk.sh
-/vagrant/setup/install_better_git_bash_prompt.sh
+#/vagrant/setup/install_android_studio.sh
+#/vagrant/setup/install_android_sdk.sh
+#/vagrant/setup/install_better_git_bash_prompt.sh
 
 # Save best till last
 /vagrant/setup/install_vim.sh

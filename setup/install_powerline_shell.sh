@@ -1,7 +1,16 @@
 #!/bin/bash
 
-
 # General info: http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
+
+# Assumes .bashrc contains the following:
+# set xterm-color256
+#function _update_ps1() {
+#    PS1="$(~/powerline-shell.py $? 2> /dev/null)"
+#}
+#
+#if [ "$TERM" != "linux" ]; then
+#    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+#fi
 
 # Install Powerline
 #Reference https://powerline.readthedocs.org/en/latest/installation/linux.html#font-installation
@@ -23,9 +32,8 @@ cp /home/vagrant/powerline-shell/config.py.dist /home/vagrant/powerline-shell/co
 
 # Get the required font patches
 cd /home/vagrant
-wget \
-https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf \
-    https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+wget -q https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+wget -q https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
 # Location to move font to determined by "xset q" for Linux Mint
 sudo mv --force PowerlineSymbols.otf /usr/share/fonts/X11/misc
 sudo fc-cache -vf /usr/share/fonts/X11/misc 

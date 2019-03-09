@@ -1,15 +1,16 @@
 #!/bin/bash
 echo "Installing Android Studio"
-echo "Installing Android Studio Java 7 dependency"
-sudo apt-get -y --force-yes install openjdk-7-jdk
-
-# Android Studio expects to find Java 7 using STUDIO_JDK env variable
-if [ ! -v STUDIO_JDK ]; then
-    # Set to java 7 path
-    echo export STUDIO_JDK=/usr/lib/jvm/java-7-openjdk-amd64 >> /home/vagrant/.bashrc
-fi
-
-sudo add-apt-repository -y ppa:paolorotolo/android-studio
+sudo add-apt-repository -y ppa:maarten-fonville/android-studio
 sudo apt-get -y -qq update
-sudo apt-get -y --force-yes install android-studio
+sudo apt-get -q -y --force-yes install android-studio
 echo "Finished installing Android Studio"
+echo -e "[Desktop Entry]\n\
+Version=1.0\n\
+Type=Application\n\
+Terminal=false\n\
+Name=Android Studio\n\
+Exec=/opt/android-studio/bin/studio.sh\n\
+Comment=Integrated Android developer tools for development and debugging.\n\
+Icon=androidstudio\n\
+Categories=GNOME;GTK;Development;IDE;" > /home/vagrant/Desktop/android-studio.desktop
+

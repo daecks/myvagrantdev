@@ -11,6 +11,12 @@
            set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
          endif
      " }
+
+     " Tmux compatible {
+        " some weird characters can be displayed on the terminal after exiting
+        " vim instances
+        " https://github.com/neovim/neovim/issues/7002
+        set guicursor=
      
      " Setup Vim plugins via Vundle {
          filetype off
@@ -36,6 +42,10 @@
          Plugin 'simplyzhao/cscope_maps.vim'
          Plugin 'tpope/vim-fugitive'
          Plugin 'rhysd/vim-clang-format'
+         " Make terminal Vim look like GVim
+         Plugin 'godlygeek/CSApprox'
+         Plugin 'jremmen/vim-ripgrep'
+
          " Colorschemes
          Bundle 'tomasr/molokai'
          call vundle#end()
@@ -44,6 +54,7 @@
  " }
  
  " General {
+     set clipboard=unnamedplus
      set background=dark         " Assume a dark background
      if !has('win32') && !has('win64') && !has('nvim')
          set term=$TERM       " Make arrow and other keys work
@@ -111,6 +122,7 @@
      set backspace=indent,eol,start  " backspace for dummys
      set linespace=0                 " No extra spaces between rows
      set nu                          " Line numbers on
+     set relativenumber              " Relative line numbers
      set showmatch                   " show matching brackets/parenthesis
      set incsearch                   " find as you type search
      set hlsearch                    " highlight search terms
@@ -206,6 +218,11 @@ set timeoutlen=1000
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
+" Disable encryption (:X)
+if !has('nvim')
+    set key=
+endif
+
 " Same as default except that I remove the 'u' option
 set complete=.,w,b,t
 
@@ -227,10 +244,6 @@ set diffopt+=iwhite
 
 " Let the syntax highlighting for Java files allow cpp keywords
 let java_allow_cpp_keywords = 1
-
-" Syntax highlighting for Python
-let python_highlight_all=1
-
 
 " Turn off that stupid highlight search
 nmap <silent> <leader>n :set invhls<CR>:set hls?<CR>
@@ -327,10 +340,10 @@ nmap <F12> <Esc>:source ~/.vimsession<CR>
 
 " Regenerate cscope database.  Make sure you're in the root directory of your
 " project when running this!
-nmap <F11> :!find `pwd` -type f -name "*.c" -o -name "*.h" -o -name "*.cpp" > cscope.files<CR>
-  \:!cscope -b -i cscope.files -f cscope.out 2>/dev/null<CR>
-  "\:!export CSCOPE_DB ="`pwd`/cscope.out"<CR>  
-  "\:cs reset<CR>
+nmap <F11> :cd /devspace/apx<CR>\:!find `pwd` -type f -name "*.mk" -o -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "Makefile" > cscope.files<CR>
+  \:!cscope -b -q -k 2>/dev/null<CR>
+  \:cs add /devspace/apx <CR>
+  \:cs reset<CR>
 
 " Launch BufExplorer
 nnoremap <silent> <leader>b :BufExplorer<CR>
@@ -450,46 +463,22 @@ vnoremap <silent> # :<C-U>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 "-----------------------------------------------------------------------------
-" Neovim terminal bindings 
-"-----------------------------------------------------------------------------
-if has("nvim")
-:tnoremap <Esc> <C-\><C-n>
-:tnoremap <A-h> <C-\><C-n><C-w>h
-:tnoremap <A-j> <C-\><C-n><C-w>j
-:tnoremap <A-k> <C-\><C-n><C-w>k
-:tnoremap <A-l> <C-\><C-n><C-w>l
-:nnoremap <A-h> <C-w>h
-:nnoremap <A-j> <C-w>j
-:nnoremap <A-k> <C-w>k
-:nnoremap <A-l> <C-w>l
-endif
-
-"-----------------------------------------------------------------------------
-" Set up the window colors and size
+" set up the window colors and size
 "-----------------------------------------------------------------------------
 if has("gui_running")
     " GUI is running or is about to start.
-    "set guifont=Droid\ Sans\ Mono:h10:cANSI
-    set guifont=Noto\ Mono
-    " Maximize gvim window.
-    "set lines=999 columns=999
     set lines=90 columns=170
-    colorscheme molokai
-elseif has("nvim")
-    " nvim settings 
-    set guifont=Droid\ Sans\ Mono
-    " Maximize gvim window.
-    "set lines=999 columns=999
-    set lines=90 columns=170
-    colorscheme molokai
-else
-    " This is console Vim.
-    if exists("+lines")
-        set lines=70
-    endif
-    if exists("+columns")
-        set columns=150
-    endif
-    " colorschem desert
 endif
+
+set guifont=Droid\ Sans\ Mono
+colorschem molokai
+
+"-----------------------------------------------------------------------------
+" Git commit file colors
+"-----------------------------------------------------------------------------
+:hi gitcommitFirstLine ctermfg=blue ctermbg=black
+
+
 :nohls
+
+
