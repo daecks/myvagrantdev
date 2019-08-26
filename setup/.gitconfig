@@ -1,0 +1,11 @@
+[user]
+	email = daecks@gmail.com
+	name = Kristian Golding
+[core]
+	editor = gvim
+[diff]
+	tool = kdiff3
+[merge]
+	tool = kdiff3
+[difftool]
+	prompt = false

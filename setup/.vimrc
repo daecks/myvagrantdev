@@ -11,20 +11,29 @@
            set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
          endif
      " }
+
+     " Tmux compatible {
+        " some weird characters can be displayed on the terminal after exiting
+        " vim instances
+        " https://github.com/neovim/neovim/issues/7002
+        set guicursor=
      
      " Setup Vim plugins via Vundle {
          filetype off
-         set rtp+=~/.vim/bundle/vundle/
-         call vundle#rc()
+         set rtp+=~/.vim/bundle/Vundle.vim
+         call vundle#begin()
 
          " This is the Vundle package, which can be found on GitHub.
          " For GitHub repos, you specify plugins using the
          " 'user/repository' format.  We include Vundle itself to
          " ensure it is always updated.
-         Plugin 'gmarik/vundle'
+         Plugin 'gmarik/Vundle.vim'
 
          " Various other plugins
          "Plugin 'vim-scripts/cscope.vim'
+         Plugin 'vim-scripts/autoload_cscope.vim'
+         " Don't use the autoload cscope plugin's menus.
+         let g:autoscope_menus = 0
          Plugin 'bling/vim-airline'
          Plugin 'vim-scripts/taglist.vim'
          Plugin 'Valloric/YouCompleteMe'
@@ -32,16 +41,22 @@
          let g:ycm_global_ycm_extra_conf = '/vagrant/cookbooks/vim-setup/.ycm_extra_conf.py'
          Plugin 'simplyzhao/cscope_maps.vim'
          Plugin 'tpope/vim-fugitive'
+         Plugin 'rhysd/vim-clang-format'
+         " Make terminal Vim look like GVim
+         Plugin 'godlygeek/CSApprox'
+         Plugin 'jremmen/vim-ripgrep'
 
          " Colorschemes
          Bundle 'tomasr/molokai'
+         call vundle#end()
      " }
 
  " }
  
  " General {
+     set clipboard=unnamedplus
      set background=dark         " Assume a dark background
-     if !has('win32') && !has('win64')
+     if !has('win32') && !has('win64') && !has('nvim')
          set term=$TERM       " Make arrow and other keys work
      endif
      filetype plugin indent on   " Automatically detect file types.
@@ -107,6 +122,7 @@
      set backspace=indent,eol,start  " backspace for dummys
      set linespace=0                 " No extra spaces between rows
      set nu                          " Line numbers on
+     set relativenumber              " Relative line numbers
      set showmatch                   " show matching brackets/parenthesis
      set incsearch                   " find as you type search
      set hlsearch                    " highlight search terms
@@ -203,7 +219,9 @@ set timeoutlen=1000
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo
 
 " Disable encryption (:X)
-set key=
+if !has('nvim')
+    set key=
+endif
 
 " Same as default except that I remove the 'u' option
 set complete=.,w,b,t
@@ -322,10 +340,10 @@ nmap <F12> <Esc>:source ~/.vimsession<CR>
 
 " Regenerate cscope database.  Make sure you're in the root directory of your
 " project when running this!
-nmap <F11> :!find `pwd` -type f -name "*.c" -o -name "*.h" -o -name "*.cpp" > cscope.files<CR>
-  \:!cscope -b -i cscope.files -f cscope.out 2>/dev/null<CR>
-  "\:!export CSCOPE_DB ="`pwd`/cscope.out"<CR>  
-  "\:cs reset<CR>
+nmap <F11> :cd /devspace/apx<CR>\:!find `pwd` -type f -name "*.mk" -o -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "Makefile" > cscope.files<CR>
+  \:!cscope -b -q -k 2>/dev/null<CR>
+  \:cs add /devspace/apx <CR>
+  \:cs reset<CR>
 
 " Launch BufExplorer
 nnoremap <silent> <leader>b :BufExplorer<CR>
@@ -367,23 +385,14 @@ else
 end
 
 "-----------------------------------------------------------------------------
-" Search for cscope database up directory tree (ala the way ctags does)
+" clang-format for Vim setup
 "-----------------------------------------------------------------------------
-function! LoadCscope()
-  let db = findfile("cscope.out", ".;")
-  if (!empty(db))
-    let path = strpart(db, 0, match(db, "/cscope.out$"))
-    set nocscopeverbose " suppress 'duplicate connection' error
-    exe "cs add " . db . " " . path
-    set cscopeverbose
-  endif
-endfunction
-au BufEnter /* call LoadCscope()
+map <C-I> :pyf /usr/share/vim/addons/syntax/clang-format-3.5.py<cr>
+imap <C-I> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.5.py<cr>
 
 "-----------------------------------------------------------------------------
 " Fix constant spelling mistakes
 "-----------------------------------------------------------------------------
-
 iab teh       the
 iab Teh       The
 iab taht      that
@@ -454,25 +463,22 @@ vnoremap <silent> # :<C-U>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 "-----------------------------------------------------------------------------
-" Set up the window colors and size
+" set up the window colors and size
 "-----------------------------------------------------------------------------
 if has("gui_running")
     " GUI is running or is about to start.
-    "set guifont=Droid\ Sans\ Mono:h10:cANSI
-    set guifont=Droid\ Sans\ Mono
-    " Maximize gvim window.
-    "set lines=999 columns=999
     set lines=90 columns=170
-    colorschem molokai
-else
-    " This is console Vim.
-    if exists("+lines")
-        set lines=70
-    endif
-    if exists("+columns")
-        set columns=150
-    endif
-    " colorschem desert
 endif
+
+set guifont=Droid\ Sans\ Mono
+colorschem molokai
+
+"-----------------------------------------------------------------------------
+" Git commit file colors
+"-----------------------------------------------------------------------------
+:hi gitcommitFirstLine ctermfg=blue ctermbg=black
+
+
 :nohls
+
 
