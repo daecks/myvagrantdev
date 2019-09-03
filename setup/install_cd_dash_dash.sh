@@ -1,2 +1,2 @@
 #!/bin/bash
-cp acd_func.sh /home/vagrant/bin/
+cp /vagrant/setup/acd_func.sh /home/vagrant/bin/

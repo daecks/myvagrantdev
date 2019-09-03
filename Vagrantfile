@@ -7,21 +7,20 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Every Vagrant virtual environment requires a box to build off of.
-    config.vm.box = "daecksdev19_0_1"
+    config.vm.box = "daecksdev"
 
-    config.vm.box_url = ["file:///C:/users/daeck/Dropbox/vagrantboxes/LinuxMint19_0_1.box"]
+    config.vm.box_url = ["https://dl.dropbox.com/s/r43u7orygupd3fr/LinuxMint19_2_1.box"]
     config.ssh.insert_key = false
     
     config.vm.provider "virtualbox" do |vb| 
         # Use the GUI.
         vb.gui = true
-        # Windows host, get amount of memory and allocate a half
-        amount_guest_memory = 4096
-        #amount_guest_memory = `wmic os get TotalVisibleMemorySize`.split("\n")[2].to_i / (1024 * 2)
+        # Specify memory allocation in MB
+        amount_guest_memory_mb = 4096
         # Allocate all CPUs to guest
         num_guest_cpus = ENV['NUMBER_OF_PROCESSORS'].to_i 
         #puts "Configuring virtual machine to use #{num_host_cpus} CPUs"
-        vb.customize ["modifyvm", :id, "--memory", "#{amount_guest_memory}", "--cpus", "#{num_guest_cpus}"]
+        vb.customize ["modifyvm", :id, "--memory", "#{amount_guest_memory_mb}", "--cpus", "#{num_guest_cpus}"]
         #vb.customize ["modifyvm", :id, "--usb", "on"]
         #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'MotoX', '--vendorid', '0x22b8']
         #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'MSI', '--vendorid', '0x05c6']
@@ -43,29 +42,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--vtxux", "on"] # Enable unrestricted guest mode 
     end
 
-# This is for initial drive creation.  
-# You cannot resize an existing drive using this entry!!!
-    config.persistent_storage.enabled = true
+    # This is for initial drive creation.  
+    # You cannot resize an existing drive using this entry!!!
+    config.persistent_storage.enabled = true 
     config.persistent_storage.location = "devdisk.vdi"
-    config.persistent_storage.size = 80000 # Max of 80 GB for devspace drive
+    config.persistent_storage.size = 80000 # Allocate this many MB to detachable drive mounted at /devspace
     config.persistent_storage.mountname = 'mydevspace'
     config.persistent_storage.filesystem = 'ext4'
     config.persistent_storage.mountpoint = '/devspace'
-    config.vm.provision :shell, :inline => "sudo chown vagrant /devspace"
 
-# If changes are made to proxy settings, you must reprovision the box
+    # If changes are made to proxy settings, you must reprovision the box
     config.apt_proxy.http  = false
     config.apt_proxy.https = false
     config.proxy.http     = false
     config.proxy.https    = false
     config.proxy.no_proxy = "localhost,127.0.0.1"
 
-  config.vm.provision "shell", path: "setup/bootstrap.sh"
+    config.vm.provision "shell", path: "setup/bootstrap.sh"
 
-  #config.vm.provision "puppet" do |puppet|
-  #puppet.manifests_path = "manifests"
-  #puppet.manifest_file  = "icecream.pp"
-  #end
 
     # Mark "true" or "false" if you want the tool installed or not.  These are
     # used by the chef recipes below which not only install apps, but also
@@ -90,7 +84,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Create a public network, which generally matched to bridged network.
     # Bridged networks make the machine appear as another physical device on
     # your network.
-#config.vm.network "public_network"
+    #config.vm.network "public_network"
 
     # If true, then any SSH connections made will enable agent forwarding.
     # Default value: false
@@ -111,3 +105,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # some recipes and/or roles.
     #
 end
+

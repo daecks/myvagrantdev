@@ -1,0 +1,189 @@
+UNIX was not designed to stop its users from doing stupid things, as that would also stop them from doing clever things.
+        - Doug Gwyn
+%
+If you’re willing to restrict the flexibility of your approach, you can almost always do something better.
+        - John Carmack
+%
+All software sucks, be it open-source [or] proprietary. The only question is what can be done with particular instance of suckage, and that’s where having the source matters.
+        - viro [http://www.ussg.iu.edu/hypermail/linux/kernel/0404.3/1344.html]
+%
+The central enemy of reliability is complexity.
+        - Geer et al.
+%
+Simplicity is prerequisite for reliability.
+        - Edsger W. Dijkstra
+%
+Unix is simple. It just takes a genius to understand its simplicity.
+        - Dennis Ritchie
+%
+Measuring programming progress by lines of code is like measuring aircraft building progress by weight.
+        - Bill Gates
+%
+Correctness is clearly the prime quality. If a system does not do what it is supposed to do, then everything else about it matters little.
+        - Bertrand Meyer
+%
+Complexity kills. It sucks the life out of developers, it makes products difficult to plan, build and test, it introduces security challenges and it causes end-user and administrator frustration.
+        - Ray Ozzie
+%
+Mostly, when you see programmers, they aren’t doing anything. One of the attractive things about programmers is that you cannot tell whether or not they are working simply by looking at them. Very often they’re sitting there seemingly drinking coffee and gossiping, or just staring into space. What the programmer is trying to do is get a handle on all the individual and unrelated ideas that are scampering around in his head.
+        - Charles M. Strauss
+%
+Compatibility means deliberately repeating other people’s mistakes.
+        - David Wheeler
+%
+Hofstadter’s Law: It always takes longer than you expect, even when you take into account Hofstadter’s Law.
+%
+Every language has an optimization operator. In C++ that operator is ‘//’
+%
+Theory is when you know something, but it doesn’t work. Practice is when something works, but you don’t know why. Programmers combine theory and practice: Nothing works and they don’t know why.
+%
+A computer is a stupid machine with the ability to do incredibly smart things, while computer programmers are smart people with the ability to do incredibly stupid things. They are, in short, a perfect match
+%
+The best code is no code at all.
+%
+Before software can be reusable it first has to be usable.
+%
+The competent programmer is fully aware of the limited size of his own skull. He therefore approaches his task with full humility, and avoids clever tricks like the plague.
+        - Edsger W. Dijkstra
+%
+Parkinson’s Law Otherwise known as the law of bureaucracy, this law states that…
+“Work expands so as to fill the time available for its completion.”
+%
+Code never lies, comments sometimes do.
+        - Ron Jeffries
+%
+… the cost of adding a feature isn’t just the time it takes to code it. The cost also includes the addition of an obstacle to future expansion. … The trick is to pick the features that don’t fight each other.
+        - John Carmack
+%
+Comparing to another activity is useful if it helps you formulate questions, it’s dangerous when you use it to justify answers.
+        - Martin Fowler
+%
+Software obeys the law of gaseous expansion - it continues to grow until memory is completely filled.
+        - Larry Gleason
+%
+Trying to outsmart a compiler defeats much of the purpose of using one.
+        - Kernighan and Plauger, The Elements of Programming Style.
+%
+You’re bound to be unhappy if you optimize everything.
+        - Donald Knuth
+%
+A distributed system is one in which the failure of a computer you didn’t even know existed can render your own computer unusable.
+        - Leslie Lamport
+%
+I have always wished that my computer would be as easy to use as my telephone. My wish has come true. I no longer know how to use my telephone.
+        - Bjarne Stroustrup
+%
+The most important single aspect of software development is to be clear about what you are trying to build.
+        - Bjarne Stroustrup
+%
+The whole point of getting things done is knowing what to leave undone.
+        - Oswald Chambers
+%
+When in doubt, leave it out.
+        - Joshua Bloch
+%
+As a programmer, it is your job to put yourself out of business. What you do today can be automated tomorrow.
+        - Doug McIlroy
+%
+Security is a state of mind.
+        - NSA Security Manual
+%
+Premature optimizations can be troublesome to revert, but premature generalizations are often near impossible.
+        - Emil Persson
+%
+Normal people believe that if it ain’t broke, don’t fix it. Engineers believe that if it ain’t broke, it doesn’t have enough features yet.
+        - Scott Adams
+%
+If you give someone a program, you will frustrate them for a day; if you teach them how to program, you will frustrate them for a lifetime.
+        - David Leinweber (NOWS)
+%
+"Walking on water and developing software from a specification are easy if both are frozen."
+        - Edward V Berard
+%
+"Talk is cheap. Show me the code."
+        - Linus Torvalds
+%
+"Perl – The only language that looks the same before and after RSA encryption."
+        - Keith Bostic
+%
+"Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it."
+        - Brian W. Kernighan.
+%
+"Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live."
+        - John Woods
+%
+“There are two ways of constructing a software design. One way is to make it so simple that there are obviously no deficiencies. And the other way is to make it so complicated that there are no obvious deficiencies.”
+        - C.A.R. Hoare
+%
+"Most good programmers do programming not because they expect to get paid or get adulation by the public, but because it is fun to program."
+        - Linus Torvalds
+%
+Some people, when confronted with a problem, think "I know, I'll use regular expressions."
+Now they have two problems.
+        - Jamie Zawinski
+%
+In theory, there is no difference between theory and practice. But, in practice, there is.
+        - Jan L. A. van de Snepscheut
+%
+There are 2 hard problems in computer science: cache invalidation, naming things, and off-by-1 errors.
+    - Leon Bambrick (@secretGeek)
+%
+The first 90% of the code accounts for the first 90% of the development time. The remaining 10% of the code accounts for the other 90% of the development time.
+        - Tom Cargill
+%
+If debugging is the process of removing software bugs, then programming must be the process of putting them in.
+        - Edsger Dijkstra
+%
+There are only two kinds of languages: the ones people complain about and the ones nobody uses
+        - Bjarne Stroustrup
+%
+If a listener nods his head when you're explaining your program, wake them up.
+%
+"Write tests until fear is transformed into boredom"
+        - Kent Beck
+%
+Optimization hinders evolution
+%
+"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+        - Kent Beck
+%
+Sufficiently advanced abstractions are indistinguishable from obfuscation.
+%
+"Debugging is like being the detective in a crime movie where you are also the murderer."
+        - @fortes
+%
+What do we want?
+Now!
+When do we want it?
+Fewer race conditions!
+        - @wellendonner
+%
+"For every complex problem there is an answer that is clear, simple, and wrong."
+        - H L Mencken
+%
+"Every great developer you know got there by solving problems they were unqualified to solve until they actually did it."
+        - Patrick McKenzie
+%
+“The cleaner and nicer the program, the faster it’s going to run. And if it doesn’t, it’ll be easy to make it fast.”
+        - Joshua Bloch
+%
+"The cost of adding a feature isn’t just the time it takes to code it. The cost also includes the addition of an obstacle to future expansion. The trick is to pick the features that don’t fight each other."
+        - John Carmack
+%
+"The purpose of software engineering is to control complexity, not to create it."
+        - Dr. Pamela Zave
+%
+Good code is its own best documentation. As you're about to add a comment, ask yourself, "How can I improve the code so that this comment isn't needed?" Improve the code and then document it to make it even clearer.”
+        - Steve McConnell
+%
+"So much complexity in software comes from trying to make one thing do two things."
+        - Ryan Singer
+%
+"A language that doesn't affect the way you think about programming is not worth knowing."
+        - Alan J. Perlis
+%
+"There's nothing more permanent than a temporary hack."
+        - Kyle Simpson
+%
+"The code you write makes you a programmer. The code you delete makes you a good one. The code you don't have to write makes you a great one."
+        - Mario Fusco

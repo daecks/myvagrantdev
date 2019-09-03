@@ -1,0 +1,13 @@
+[user]
+    email = <youremailaddress>
+    name = <yourname>
+[core]
+    editor = vim
+[diff]
+    tool = kdiff3
+[merge]
+    tool = kdiff3
+[difftool]
+    prompt = false
+[include]
+    path = /home/vagrant/.gitalias.txt

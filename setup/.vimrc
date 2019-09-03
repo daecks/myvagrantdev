@@ -471,7 +471,7 @@ if has("gui_running")
 endif
 
 set guifont=Droid\ Sans\ Mono
-colorschem molokai
+colorscheme molokai
 
 "-----------------------------------------------------------------------------
 " Git commit file colors
