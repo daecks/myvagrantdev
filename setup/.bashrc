@@ -119,3 +119,8 @@ export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
 # Use tree to show directory structure
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
 bind -x '"\C-p": vim $(fzf);'
+
+pathmunge /home/vagrant/.pyenv/bin
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+

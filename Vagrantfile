@@ -11,7 +11,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.box_url = ["https://dl.dropbox.com/s/r43u7orygupd3fr/LinuxMint19_2_1.box"]
     config.ssh.insert_key = false
-    
+
+    config.vagrant.plugins = ["vagrant-persistent-storage", "vagrant-vbguest", "vagrant-proxyconf"]
     config.vm.provider "virtualbox" do |vb| 
         # Use the GUI.
         vb.gui = true
@@ -23,7 +24,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--memory", "#{amount_guest_memory_mb}", "--cpus", "#{num_guest_cpus}"]
         #vb.customize ["modifyvm", :id, "--usb", "on"]
         #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'MotoX', '--vendorid', '0x22b8']
-        #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'MSI', '--vendorid', '0x05c6']
         #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Sony', '--vendorid', '0x054c']
         #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Sony', '--vendorid', '0x0fce']
         #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Android bootloader', '--vendorid', '0x18d1']
@@ -59,7 +59,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.proxy.no_proxy = "localhost,127.0.0.1"
 
     config.vm.provision "shell", path: "setup/bootstrap.sh"
-
 
     # Mark "true" or "false" if you want the tool installed or not.  These are
     # used by the chef recipes below which not only install apps, but also

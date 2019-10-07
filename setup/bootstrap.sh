@@ -31,9 +31,11 @@ sudo apt-get -qq install sysbench
 sudo apt-get -qq install tree
 sudo apt-get -qq install ctags
 sudo apt-get -qq install shellcheck
+sudo apt-get -qq install openjdk-11-jdk
 
 sudo snap install rust --edge
 sudo snap install android-studio --classic
+sudo snap install intellij-idea-community --classic --edge
 sudo snap install pycharm-community --classic
 sudo snap install code --classic
 #sudo snap install node --classic --channel=12 #Disabled until Virtualbox interaction fix

@@ -1,6 +1,6 @@
 ### Features
 
-+ Based on Linux Mint 19.2 Vagrant box
++ Based on a Linux Mint 19.2 Vagrant box
 + Scripted installation of the following tools:
   + Ripgrep
   + fzf
@@ -21,9 +21,15 @@
   + Ruby
   + Scala
   + Clojure
+  + Java (OpenJDK)
   
 ### Installation
-Installed and tested with Virtualbox 6.0.10 and Vagrant 2.2.5.  These must be installed before performing "vagrant up" on cloned repo, i.e.:
-`    git clone https://github.com/daecks/myvagrantdev `
-    `cd myvagrantdev`
-    `vagrant up`
+Installed and tested with Virtualbox 6.0.10 (https://www.virtualbox.org/wiki/Download_Old_Builds)   
+and Vagrant 2.2.5 (https://www.vagrantup.com/downloads.html)  
+on a Windows 10 machine.
+
+These must be installed before performing "vagrant up" on cloned repo, i.e.:  
+    `git clone https://github.com/daecks/myvagrantdev`  
+    `cd myvagrantdev`  
+    `vagrant up`  
+
