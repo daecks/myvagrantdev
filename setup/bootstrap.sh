@@ -33,7 +33,6 @@ sudo apt-get -qq install ctags
 sudo apt-get -qq install shellcheck
 sudo apt-get -qq install openjdk-11-jdk
 
-sudo snap install rust --edge
 sudo snap install android-studio --classic
 sudo snap install intellij-idea-community --classic --edge
 sudo snap install pycharm-community --classic
@@ -57,6 +56,7 @@ wget https://raw.githubusercontent.com/GitAlias/gitalias/master/gitalias.txt -O 
 /vagrant/setup/install_seven_languages_book.sh
 /vagrant/setup/install_tmux.sh
 /vagrant/setup/install_mono.sh
+/vagrant/setup/install_rust.sh
 sudo pip3 install thefuck
 /vagrant/setup/install_vim.sh
 
