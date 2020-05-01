@@ -24,9 +24,9 @@
   + Java (OpenJDK)
   
 ### Installation
-Installed and tested with Virtualbox 6.0.10 (https://www.virtualbox.org/wiki/Download_Old_Builds)   
-and Vagrant 2.2.5 (https://www.vagrantup.com/downloads.html)  
-on a Windows 10 machine.
+Installed and tested with Virtualbox 6.1.6 (https://www.virtualbox.org/wiki/Download_Old_Builds)   
+and Vagrant 2.2.7 (https://www.vagrantup.com/downloads.html)  
+on a Windows 10 machine running an AMD Ryzen processor.
 
 These must be installed before performing "vagrant up" on cloned repo, i.e.:  
     `git clone https://github.com/daecks/myvagrantdev`  

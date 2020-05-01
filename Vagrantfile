@@ -37,9 +37,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--ostype", "Ubuntu_64"] # Mint is really Ubuntu
         vb.customize ["modifyvm", :id, "--pae", "on"] # enable physical address extensions
         vb.customize ["modifyvm", :id, "--nestedpaging", "on"] # Enable hardware memory management
-        vb.customize ["modifyvm", :id, "--largepages", "on"] # Larger pages for reduced Translation Lookaside Buffer usage
-        vb.customize ["modifyvm", :id, "--vtxvpid", "on"] # If TLBs are used, accelerate context switching
-        vb.customize ["modifyvm", :id, "--vtxux", "on"] # Enable unrestricted guest mode 
+        vb.customize ["modifyvm", :id, "--largepages", "off"] # Larger pages for reduced Translation Lookaside Buffer usage
+        vb.customize ["modifyvm", :id, "--vtxvpid", "off"] # If TLBs are used, accelerate context switching
+        vb.customize ["modifyvm", :id, "--vtxux", "off"] # Enable unrestricted guest mode 
+        vb.customize ["modifyvm", :id, "--nested-hw-virt", "on"] # Enable nested virtualization
     end
 
     # This is for initial drive creation.  
