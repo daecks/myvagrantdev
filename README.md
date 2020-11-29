@@ -27,7 +27,7 @@
     `git clone https://github.com/daecks/myvagrantdev`  
     `cd myvagrantdev`  
     `install_dependencies.bat`
-    `reboot machine`
+    (reboot machine if Vagrant version changes)
     `vagrant up`  
 
 Installed and tested with Virtualbox 6.1.16 and Vagrant 2.2.14
