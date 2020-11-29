@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         # Use the GUI.
         vb.gui = true
         # Specify memory allocation in MB
-        amount_guest_memory_mb = 4096
+        amount_guest_memory_mb = 12000
         # Allocate all CPUs to guest
         num_guest_cpus = ENV['NUMBER_OF_PROCESSORS'].to_i 
         #puts "Configuring virtual machine to use #{num_host_cpus} CPUs"
@@ -34,13 +34,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"] # Enable bidirectional clipboard
         vb.customize ["modifyvm", :id, "--draganddrop", "disabled"] # Enable drag/drop between host and guest
         vb.customize ["modifyvm", :id, "--hwvirtex", "on"] # Enable hardware virtualization
+        vb.customize ["modifyvm", :id, "--nested-hw-virt", "off"] # Enable nested virtualization
         vb.customize ["modifyvm", :id, "--ostype", "Ubuntu_64"] # Mint is really Ubuntu
         vb.customize ["modifyvm", :id, "--pae", "on"] # enable physical address extensions
         vb.customize ["modifyvm", :id, "--nestedpaging", "on"] # Enable hardware memory management
         vb.customize ["modifyvm", :id, "--largepages", "off"] # Larger pages for reduced Translation Lookaside Buffer usage
         vb.customize ["modifyvm", :id, "--vtxvpid", "off"] # If TLBs are used, accelerate context switching
         vb.customize ["modifyvm", :id, "--vtxux", "off"] # Enable unrestricted guest mode 
-        vb.customize ["modifyvm", :id, "--nested-hw-virt", "on"] # Enable nested virtualization
+        vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"] # Enable better graphics controller
+        vb.customize ["modifyvm", :id, "--vram", "256"] # Enable better graphics controller
     end
 
     # This is for initial drive creation.  

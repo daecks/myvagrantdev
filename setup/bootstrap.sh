@@ -60,6 +60,11 @@ wget https://raw.githubusercontent.com/GitAlias/gitalias/master/gitalias.txt -O 
 sudo pip3 install thefuck
 /vagrant/setup/install_vim.sh
 
+# KVM installation https://developer.android.com/studio/run/emulator-acceleration?utm_source=android-studio#vm-linux)
+# But without ubuntu-vm-builder, which is not available in linux mint.
+sudo apt-get -qq install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils ia32-libs-multiarch
+sudo adduser $USER kvm
+
 cp /var/lib/snapd/desktop/applications/*.desktop /home/vagrant/Desktop
 sudo chmod +x /home/vagrant/Desktop/*.desktop
 sudo chown vagrant /home/vagrant/Desktop/*.desktop
