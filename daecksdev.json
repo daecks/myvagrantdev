@@ -1,0 +1,21 @@
+{
+    "name": "daecksdev",
+    "description": "This box contains Linux Mint 64-bit.",
+    "versions": [{
+        "version": "1.0.0",
+        "providers": [{
+                "name": "virtualbox",
+                "url": "https://dl.dropbox.com/s/r43u7orygupd3fr/LinuxMint19_2_1.box",
+                "checksum_type": "sha1",
+                "checksum": "5C352DC3F1BED66FB89FF778F6B60EB53883DC2F"
+        }]
+    },{
+        "version": "2.0.0",
+        "providers": [{
+                "name": "virtualbox",
+                "url": "https://dl.dropbox.com/s/j4sat2k9oyojkys/LinuxMint20_0_1.box",
+                "checksum_type": "sha1",
+                "checksum": "3CD9D836507EF68A601D153092AEC467EDFB1773"
+        }]
+     }]
+}

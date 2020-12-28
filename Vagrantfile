@@ -8,8 +8,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Every Vagrant virtual environment requires a box to build off of.
     config.vm.box = "daecksdev"
-
-    config.vm.box_url = ["https://dl.dropbox.com/s/r43u7orygupd3fr/LinuxMint19_2_1.box"]
+    
+    config.vm.box_url = ["file:///"+Dir.pwd+"/daecksdev.json"]
     config.ssh.insert_key = false
 
     config.vagrant.plugins = ["vagrant-persistent-storage", "vagrant-vbguest", "vagrant-proxyconf"]

@@ -8,12 +8,13 @@ case $- in
       *) return;;
 esac
 
-# Define some functions for shell and path management
+export GOPATH=/home/vagrant/go
+
 function _update_ps1() {
-    PS1=$(powerline-shell $?)
+    PS1="$($GOPATH/bin/powerline-go -error $?)"
 }
 
-if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 
@@ -61,12 +62,12 @@ function_exists() {
 }
 
 # Allows a "g" to be put in front of any aliases defined in, or referenced by, the .gitconfig file
-for al in `__git_aliases`; do
-    alias g$al="git $al"
-
-    complete_func=_git_$(__git_aliased_command $al)
-    function_exists $complete_func && __git_complete g$al $complete_func
-done
+#for al in `__git_aliases`; do
+#    alias g$al="git $al"
+#
+#    complete_func=_git_$(__git_aliased_command $al)
+#    function_exists $complete_func && __git_complete g$al $complete_func
+#done
 
 # Aliases
 alias g='git'
@@ -77,13 +78,16 @@ alias j='jobs -l'
 alias which='type -a'
 alias ..='cd ..'
 alias bd=". bd -si"
-eval "$(thefuck --alias)"
+alias bat=batcat # Due to name clash with another package
+#eval "$(thefuck --alias)" # Somepoint later....
 
 # Path setup
 export STUDIO_JDK=/usr/lib/jvm/java-7-oracle
 export JAVA_HOME=/usr/lib/jvm/java-7-oracle
 pathmunge /home/vagrant/Android/Sdk/platform-tools
-pathmunge /snap/bin
+pathmunge /usr/local/go/bin
+pathmunge /home/vagrant/bin
+pathmunge /home/vagrant/.cargo/bin
 export ANDROID_HOME=/home/vagrant/Android/Sdk
 export STAY_OFF_MY_LAWN=1 # Don't let Android mess with the prompt
 
@@ -120,7 +124,5 @@ export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :500 {}'"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -100'"
 bind -x '"\C-p": vim $(fzf);'
 
-#pathmunge /home/vagrant/.pyenv/bin
-#eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
 
+source "$HOME/.cargo/env"

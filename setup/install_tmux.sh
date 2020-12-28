@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Force symlink of .tmux.conf
 if ! [ -L /home/vagrant/.tmux.conf ]; then
     # Remove non-symlinked file
