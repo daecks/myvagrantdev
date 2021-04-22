@@ -17,18 +17,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         # Use the GUI.
         vb.gui = true
         # Specify memory allocation in MB
-        amount_guest_memory_mb = 12000
+        amount_guest_memory_mb = 16000
         # Allocate all CPUs to guest
-        num_guest_cpus = ENV['NUMBER_OF_PROCESSORS'].to_i 
+        #num_guest_cpus = ENV['NUMBER_OF_PROCESSORS'].to_i 
+        num_guest_cpus = 16 
         #puts "Configuring virtual machine to use #{num_host_cpus} CPUs"
         vb.customize ["modifyvm", :id, "--memory", "#{amount_guest_memory_mb}", "--cpus", "#{num_guest_cpus}"]
-        #vb.customize ["modifyvm", :id, "--usb", "on"]
-        #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'MotoX', '--vendorid', '0x22b8']
+        vb.customize ["modifyvm", :id, "--usb", "on"]
+        vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'QCOM', '--vendorid', '0x05c6']
         #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Sony', '--vendorid', '0x054c']
         #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Sony', '--vendorid', '0x0fce']
-        #vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'Android bootloader', '--vendorid', '0x18d1']
+        vb.customize ['usbfilter', 'add', '1', '--target', :id, '--name', 'Android bootloader', '--vendorid', '0x18d1']
         vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/devspace", "1"]
         vb.customize ["modifyvm", :id, "--usbxhci", "on"] # Forcefully disable USB 2.0 as requires VB extensions
+        vb.customize ["modifyvm", :id, "--usbehci", "off"] # Forcefully disable USB 3.0 as requires VB extensions
         vb.customize ["modifyvm", :id, "--accelerate3d", "off"] # Disable 3d acceleration until Virtualbox team fixes it
         vb.customize ["modifyvm", :id, "--audio", "none"] # We don't need audio
         vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"] # Enable bidirectional clipboard

@@ -30,12 +30,16 @@ sudo apt-get -qq install bat
 sudo apt-get -qq install vim
 sudo apt-get -qq install dos2unix
 sudo apt-get -qq install cmake
+sudo apt-get -qq install colordiff
 
 flatpak -y install flathub org.freedesktop.Platform//20.08
 flatpak -y install flathub com.google.AndroidStudio
 flatpak -y install flathub com.jetbrains.IntelliJ-IDEA-Community
 flatpak -y install flathub com.jetbrains.PyCharm-Community
 flatpak -y install flathub com.visualstudio.code
+
+# Android stuff
+sudo apt-get -qq install libudev-dev # udev rules
 
 # Copy .desktop files from flatpak installs to user desktop
 cp /var/lib/flatpak/exports/share/applications/*.desktop /home/vagrant/Desktop/

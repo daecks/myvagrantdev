@@ -80,16 +80,19 @@ alias ..='cd ..'
 alias bd=". bd -si"
 alias bat=batcat # Due to name clash with another package
 #eval "$(thefuck --alias)" # Somepoint later....
+alias goapo='cd $ANDROID_PRODUCT_OUT'
 
 # Path setup
-export STUDIO_JDK=/usr/lib/jvm/java-7-oracle
-export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+export STUDIO_JDK=/usr/lib/jvm/java-8-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 pathmunge /home/vagrant/Android/Sdk/platform-tools
 pathmunge /usr/local/go/bin
 pathmunge /home/vagrant/bin
 pathmunge /home/vagrant/.cargo/bin
+pathmunge /home/vagrant/.local/bin
 export ANDROID_HOME=/home/vagrant/Android/Sdk
 export STAY_OFF_MY_LAWN=1 # Don't let Android mess with the prompt
+export LC_ALL=C # Specify output type for earlier verions of Android on newer Linux
 
 # Use cd -- to view directory history list
 # Use cd -<num> to choose that directory
